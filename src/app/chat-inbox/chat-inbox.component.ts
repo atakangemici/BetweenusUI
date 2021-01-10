@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 
-const SOCKET_ENDPOINT = 'localhost:3000';
+const SOCKET_ENDPOINT = 'https://chatnodebackend.herokuapp.com';
 
 
 @Component({
