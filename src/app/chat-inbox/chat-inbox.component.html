@@ -40,7 +40,7 @@
                 </div>
 
                 <div class="messages-box">
-                    <div class="list-group rounded-0">
+                    <!-- <div class="list-group rounded-0">
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media"><img
                                     src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
@@ -55,7 +55,7 @@
                             </div>
                         </a>
 
-                    </div>
+                    </div> -->
 
                     <input type="text" class="form-control rounded-0 border-0 py-4 bg-light"
                         [(ngModel)]="messagePassword" [ngModelOptions]="{standalone: true}" placeholder="şifre" />
@@ -80,7 +80,7 @@
                                 <div class="bg-primary rounded py-2 px-3 mb-2">
                                     <p class="text-small mb-0 text-white">{{messageRead.message}}</p>
                                 </div>
-                                <p class="small text-muted">Ben | {{messageRead.minuteAndHour}}</p>
+                                <p class="small text-muted">Ben - {{messageRead.minuteAndHour}}</p>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                                 <div class="bg-light rounded py-2 px-3 mb-2">
                                     <p class="text-small mb-0 text-muted">{{messageRead.message}}</p>
                                 </div>
-                                <p class="small text-muted">Sen | {{messageRead.minuteAndHour}}</p>
+                                <p class="small text-muted">Sen - {{messageRead.minuteAndHour}}</p>
                             </div>
                         </div>
                     </div>
