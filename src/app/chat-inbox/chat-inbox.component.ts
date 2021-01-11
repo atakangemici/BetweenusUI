@@ -16,6 +16,7 @@ export class ChatInboxComponent implements OnInit {
   new_message: string;
   user_send: string;
   messageArray = Array<object>();
+  messagePassword: string;
 
   constructor() {
 
@@ -26,13 +27,17 @@ export class ChatInboxComponent implements OnInit {
     this.setupSocketConnection();
   }
 
+  SendPassword() {
+    console.log(this.messagePassword);
+  }
+
   SendMessage() {
     if (this.send_message) {
       this.new_message = this.send_message;
       let dateTime = new Date()
       let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
 
-      let data = this.send_message + "|" + minuteAndHour
+      let data = this.send_message + "|" + minuteAndHour + "|" + "asdf9%!4218qd78q9&" + this.messagePassword + "&4adfgd9%13!256"
 
       this.socket.emit('message', data);
 
@@ -58,14 +63,21 @@ export class ChatInboxComponent implements OnInit {
         let dataSplit = data.split("|");
         let message = dataSplit[0];
         let minuteAndHour = dataSplit[1];
+        let passSplit = dataSplit[2];
+        let pass = passSplit.split("&");
 
-        let messageObj = {};
-        messageObj["message"] = message;
-        messageObj["minuteAndHour"] = minuteAndHour;
-        messageObj["user"] = "you"
+        if (pass[1] == this.messagePassword) {
+          let messageObj = {};
+          messageObj["message"] = message;
+          messageObj["minuteAndHour"] = minuteAndHour;
+          messageObj["messagePassword"] = this.messagePassword;
+          messageObj["user"] = "you"
 
-        this.messageArray.push(messageObj);
-        this.new_message = data;
+          this.messageArray.push(messageObj);
+        }
+
+
+
       }
     });
   }
