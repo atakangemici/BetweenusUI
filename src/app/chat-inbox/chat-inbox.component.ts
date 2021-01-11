@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 
-const SOCKET_ENDPOINT = 'https://chatnodebackend.herokuapp.com';
+// const SOCKET_ENDPOINT = 'https://chatnodebackend.herokuapp.com';
+const SOCKET_ENDPOINT = 'http://localhost:3000';
 
 
 @Component({
@@ -11,14 +12,13 @@ const SOCKET_ENDPOINT = 'https://chatnodebackend.herokuapp.com';
 })
 export class ChatInboxComponent implements OnInit {
   socket;
-  message: string;
+  send_message: string;
   new_message: string;
   user_send: string;
   messageArray = Array<object>();
 
   constructor() {
 
-    let arr = [];
 
   }
 
@@ -27,18 +27,27 @@ export class ChatInboxComponent implements OnInit {
   }
 
   SendMessage() {
-    this.socket.emit('message', this.message);
-    this.new_message = this.message;
+    if (this.send_message) {
+      this.new_message = this.send_message;
+      let dateTime = new Date()
+      let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
 
-    let messageObj = {};
-    messageObj["message"] = this.message;
-    messageObj["user"] = "me"
+      let data = this.send_message + "|" + minuteAndHour
 
-    this.messageArray.push(messageObj);
+      this.socket.emit('message', data);
 
-    this.message = '';
 
-    this.user_send = "me";
+      let messageObj = {};
+      messageObj["message"] = this.send_message;
+      messageObj["minuteAndHour"] = minuteAndHour;
+      messageObj["user"] = "me"
+
+      this.messageArray.push(messageObj);
+
+      this.send_message = '';
+    }
+
+
   }
 
   setupSocketConnection() {
@@ -46,8 +55,13 @@ export class ChatInboxComponent implements OnInit {
     this.socket.on('message-broadcast', (data: string) => {
       if (data) {
 
+        let dataSplit = data.split("|");
+        let message = dataSplit[0];
+        let minuteAndHour = dataSplit[1];
+
         let messageObj = {};
-        messageObj["message"] = data;
+        messageObj["message"] = message;
+        messageObj["minuteAndHour"] = minuteAndHour;
         messageObj["user"] = "you"
 
         this.messageArray.push(messageObj);
