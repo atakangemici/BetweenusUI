@@ -1,38 +1,11 @@
-<!-- <div class="chat-messages">
-    <div class="chat-messages-show-container">
-        <ul class="chat-messages-show-list">
-            <div *ngFor="let messageRead of messageArray">
-                <div *ngIf="messageRead.user == 'me'" style="text-align: right;">
-                    <label> Ben : {{messageRead.message}}</label>
-
-                </div>
-                <div *ngIf="messageRead.user == 'you'">
-                    <label> Sen : {{messageRead.message}}</label>
-
-                </div>
-
-            </div>
-
-
-
-
-
-        </ul>
-    </div>
-    <div class="chat-messages-create-container">
-
-        <input class="chat-messages-create-input" type="text" [(ngModel)]="message">
-        <button class="chat-messages-create-button" (click)="SendMessage()"> Gönder </button>
-    </div>
-</div> -->
-
 <div class="container py-5 px-4" style="margin-top: 3%;">
     <!-- For demo purpose-->
-
-
     <div class="row rounded-lg overflow-hidden shadow">
         <!-- Users box-->
         <div class="col-4 px-0">
+            <div>
+                
+            </div>
             <div class="bg-white">
 
                 <div class="bg-gray px-4 py-2 bg-light">
@@ -40,27 +13,32 @@
                 </div>
 
                 <div class="messages-box">
-                    <!-- <div class="list-group rounded-0">
+                    <div class="list-group rounded-0"  *ngFor="let user of userArray">
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
-                            <div class="media"><img
-                                    src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                    alt="user" width="50" class="rounded-circle">
+                            <div class="media">
                                 <div class="media-body ml-4">
                                     <div class="d-flex align-items-center justify-content-between mb-1">
-                                        <h6 class="mb-0">Jason Doe</h6><small class="small font-weight-bold">25
-                                            Dec</small>
+                                        <h6 class="mb-0">{{user}}</h6><small class="small font-weight-bold"></small>
                                     </div>
 
                                 </div>
                             </div>
                         </a>
-
-                    </div> -->
-
+                    </div>
+                    
                     <input type="text" class="form-control rounded-0 border-0 py-4 bg-light"
-                        [(ngModel)]="messagePassword" [ngModelOptions]="{standalone: true}" placeholder="şifre" />
+                    [(ngModel)]="userName"  placeholder="Adınız">
+                    
+                    <input type="text" class="form-control rounded-0 border-0 py-4 bg-light"
+                        [(ngModel)]="messagePassword" placeholder="şifre">
 
-                       
+                      
+
+                        <button type="button" class="btn btn-info" (click)="GeneratePassword()">Şifre Üret</button>
+                        {{randomPass}}
+
+                        <button type="button" class="btn btn-info" (click)="JoinChat(userName)">Katıl</button>
+
                 </div>
             </div>
         </div>
@@ -68,8 +46,6 @@
         <div class="col-8 px-0">
             <div class="px-4 py-5 chat-box bg-white">
                 <!-- Sender Message-->
-
-
                 <div *ngFor="let messageRead of messageArray">
 
                     <div *ngIf="messageRead.user == 'me'">
@@ -79,43 +55,35 @@
                                 <div class="bg-primary rounded py-2 px-3 mb-2">
                                     <p class="text-small mb-0 text-white">{{messageRead.message}}</p>
                                 </div>
-                                <p class="small text-muted">Ben - {{messageRead.minuteAndHour}}</p>
+                                <p class="small text-muted">{{userName}} - {{messageRead.minuteAndHour}}</p>
                             </div>
                         </div>
                     </div>
-
                     <div *ngIf="messageRead.user == 'you'">
 
-                        <div class="media w-50 mb-3"><img
-                                src="https://res.cloudinary.com/mhmd/image/upload/v1564960395/avatar_usae7z.svg"
-                                alt="user" width="50" class="rounded-circle">
+                        <div class="media w-50 mb-3">
                             <div class="media-body ml-3">
                                 <div class="bg-light rounded py-2 px-3 mb-2">
                                     <p class="text-small mb-0 text-muted">{{messageRead.message}}</p>
                                 </div>
-                                <p class="small text-muted">Sen - {{messageRead.minuteAndHour}}</p>
+                                <p class="small text-muted">{{userName}} - {{messageRead.minuteAndHour}}</p>
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
-
             </div>
-
             <!-- Typing area -->
             <form action="#" class="bg-light">
                 <div class="input-group">
                     <input type="text" class="form-control rounded-0 border-0 py-4 bg-light" [(ngModel)]="send_message"
-                        [ngModelOptions]="{standalone: true}" placeholder="mesajını yaz" />
+                    (keydown.enter)="SendMessage()"  [ngModelOptions]="{standalone: true}" placeholder="mesajını yaz" />
                     <div class="input-group-append">
-                        <button id="button-addon2" type="submit" class="btn btn-link"> <i class="fa fa-paper-plane"
+                        <button id="button-addon2" type="text" class="btn btn-link"> <i class="fa fa-paper-plane"
                                 (click)="SendMessage()"></i></button>
+
                     </div>
                 </div>
             </form>
-
         </div>
     </div>
 </div>

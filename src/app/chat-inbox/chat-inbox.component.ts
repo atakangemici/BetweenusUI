@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 
-const SOCKET_ENDPOINT = 'https://aramizda-app-backend.herokuapp.com';
-// const SOCKET_ENDPOINT = 'http://localhost:3000';
+// const SOCKET_ENDPOINT = 'https://aramizda-app-backend.herokuapp.com';
+const SOCKET_ENDPOINT = 'http://localhost:3000';
 
 @Component({
   selector: 'app-chat-inbox',
@@ -15,19 +15,28 @@ export class ChatInboxComponent implements OnInit {
   new_message: string;
   user_send: string;
   messageArray = Array<object>();
+  userArray = Array<object>();
   messagePassword: string;
+  userName: string;
+  randomPass : string;
 
-  constructor() {
-
-
-  }
+  constructor() {}
 
   ngOnInit() {
-    this.setupSocketConnection();
+    this.SetupSocketConnection();
   }
 
-  SendPassword() {
-    console.log(this.messagePassword);
+  JoinChat(userName){
+    this.userArray.push(userName);
+    let data = {};      
+    data["password"] =this.messagePassword;
+    data["users"] =this.userName;
+
+    this.socket.emit('message', data);
+  }
+
+  GeneratePassword(){
+    this.randomPass = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
   SendMessage() {
@@ -36,49 +45,41 @@ export class ChatInboxComponent implements OnInit {
       let dateTime = new Date()
       let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
 
-      let data = this.send_message + "|" + minuteAndHour + "|" + "asdf9%!4218qd78q9&" + this.messagePassword + "&4adfgd9%13!256"
+      let data = {};      
+      data["password"] =this.messagePassword;
+      data["users"] =this.userName;
+      data["time"] =minuteAndHour;
+      data["message"] =this.send_message;
 
       this.socket.emit('message', data);
-
 
       let messageObj = {};
       messageObj["message"] = this.send_message;
       messageObj["minuteAndHour"] = minuteAndHour;
-      messageObj["user"] = "me"
+      messageObj["user"] = "me";
 
       this.messageArray.push(messageObj);
-
       this.send_message = '';
     }
-
-
   }
 
-  setupSocketConnection() {
+  SetupSocketConnection() {
     this.socket = io(SOCKET_ENDPOINT);
-    this.socket.on('message-broadcast', (data: string) => {
-      if (data) {
+    this.socket.on('message-broadcast', (data: object) => {
 
-        let dataSplit = data.split("|");
-        let message = dataSplit[0];
-        let minuteAndHour = dataSplit[1];
-        let passSplit = dataSplit[2];
-        let pass = passSplit.split("&");
+        console.log(data);
+        if (data["password"] == this.messagePassword) {
 
-        if (pass[1] == this.messagePassword) {
-          let messageObj = {};
-          messageObj["message"] = message;
-          messageObj["minuteAndHour"] = minuteAndHour;
-          messageObj["messagePassword"] = this.messagePassword;
-          messageObj["user"] = "you"
-
-          this.messageArray.push(messageObj);
+          if(data["message"] !=null){
+            let messageObj = {};
+            messageObj["message"] = data["message"];
+            messageObj["minuteAndHour"] = data["time"];
+            messageObj["user"] = "you";
+            this.messageArray.push(messageObj);
+          }
+         
+          this.userArray.push(data["users"]);
         }
-
-
-
-      }
     });
   }
-
 }
