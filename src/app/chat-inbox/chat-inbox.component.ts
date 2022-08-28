@@ -18,24 +18,33 @@ export class ChatInboxComponent implements OnInit {
   userArray = Array<object>();
   messagePassword: string;
   userName: string;
-  randomPass : string;
+  randomPass: string;
+  userNameCheck: boolean;
 
-  constructor() {}
+  constructor() { }
 
   ngOnInit() {
     this.SetupSocketConnection();
   }
 
-  JoinChat(userName){
-    this.userArray.push(userName);
-    let data = {};      
-    data["password"] =this.messagePassword;
-    data["users"] =this.userName;
+  JoinChat(userName) {
+
+    this.userArray.forEach(name => {
+      if (name == userName)
+        this.userNameCheck = true;
+    });
+
+    if (!this.userNameCheck)
+      this.userArray.push(userName);
+
+    let data = {};
+    data["password"] = this.messagePassword;
+    data["users"] = this.userName;
 
     this.socket.emit('message', data);
   }
 
-  GeneratePassword(){
+  GeneratePassword() {
     this.randomPass = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
   }
 
@@ -45,11 +54,11 @@ export class ChatInboxComponent implements OnInit {
       let dateTime = new Date()
       let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
 
-      let data = {};      
-      data["password"] =this.messagePassword;
-      data["users"] =this.userName;
-      data["time"] =minuteAndHour;
-      data["message"] =this.send_message;
+      let data = {};
+      data["password"] = this.messagePassword;
+      data["users"] = this.userName;
+      data["time"] = minuteAndHour;
+      data["message"] = this.send_message;
 
       this.socket.emit('message', data);
 
@@ -67,20 +76,22 @@ export class ChatInboxComponent implements OnInit {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast', (data: object) => {
 
-        console.log(data);
-        if (data["password"] == this.messagePassword) {
+      console.log(data);
+      if (data["password"] == this.messagePassword) {
 
-          if(data["message"] !=null){
-            let messageObj = {};
-            messageObj["message"] = data["message"];
-            messageObj["minuteAndHour"] = data["time"];
-            messageObj["user"] = "you";
-            messageObj["fromUser"] = data["users"];
-            this.messageArray.push(messageObj);
-          }
-         
-          this.userArray.push(data["users"]);
+        if (data["message"] != null) {
+          let messageObj = {};
+          messageObj["message"] = data["message"];
+          messageObj["minuteAndHour"] = data["time"];
+          messageObj["user"] = "you";
+          messageObj["fromUser"] = data["users"];
+          this.messageArray.push(messageObj);
         }
+
+
+        this.userArray.push(data["users"]);
+
+      }
     });
   }
 }
