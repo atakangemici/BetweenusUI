@@ -57,3 +57,12 @@ input::placeholder {
   font-size: 0.9rem;
   color: #999;
 }
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  color: white;
+  text-align: center;
+}

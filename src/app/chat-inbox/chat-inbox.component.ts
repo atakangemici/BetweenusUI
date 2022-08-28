@@ -75,6 +75,7 @@ export class ChatInboxComponent implements OnInit {
             messageObj["message"] = data["message"];
             messageObj["minuteAndHour"] = data["time"];
             messageObj["user"] = "you";
+            messageObj["fromUser"] = data["users"];
             this.messageArray.push(messageObj);
           }
          

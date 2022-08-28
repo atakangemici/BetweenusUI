@@ -4,16 +4,17 @@
         <!-- Users box-->
         <div class="col-4 px-0">
             <div>
-                
+
             </div>
             <div class="bg-white">
 
                 <div class="bg-gray px-4 py-2 bg-light">
-                    <p class="h5 mb-0 py-1">Katılımcılar</p>
+                    <p class="h5 mb-0 py-1" style="
+                    text-align: center;">Katılımcılar</p>
                 </div>
 
                 <div class="messages-box">
-                    <div class="list-group rounded-0"  *ngFor="let user of userArray">
+                    <div class="list-group rounded-0" *ngFor="let user of userArray">
                         <a class="list-group-item list-group-item-action active text-white rounded-0">
                             <div class="media">
                                 <div class="media-body ml-4">
@@ -25,19 +26,21 @@
                             </div>
                         </a>
                     </div>
-                    
+
+                    <input type="text" class="form-control rounded-0 border-0 py-4 bg-light" [(ngModel)]="userName"
+                        placeholder="Adınız">
+
                     <input type="text" class="form-control rounded-0 border-0 py-4 bg-light"
-                    [(ngModel)]="userName"  placeholder="Adınız">
-                    
-                    <input type="text" class="form-control rounded-0 border-0 py-4 bg-light"
-                        [(ngModel)]="messagePassword" placeholder="şifre">
+                        [(ngModel)]="messagePassword" placeholder="Şifre">
 
-                      
 
-                        <button type="button" class="btn btn-info" (click)="GeneratePassword()">Şifre Üret</button>
-                        {{randomPass}}
+                    <button type="button" style="    width: 100%;
+                        margin-top: 10px;" class="btn btn-info" (click)="JoinChat(userName)">Katıl</button>
 
-                        <button type="button" class="btn btn-info" (click)="JoinChat(userName)">Katıl</button>
+                    <button type="button" style="width:100%;margin-top:10px" class="btn btn-info"
+                        (click)="GeneratePassword()">Şifre Üret</button>
+
+                    <div style="text-align: center;margin-top: 10px;">{{randomPass}}</div>
 
                 </div>
             </div>
@@ -66,7 +69,7 @@
                                 <div class="bg-light rounded py-2 px-3 mb-2">
                                     <p class="text-small mb-0 text-muted">{{messageRead.message}}</p>
                                 </div>
-                                <p class="small text-muted">{{userName}} - {{messageRead.minuteAndHour}}</p>
+                                <p class="small text-muted">{{messageRead.fromUser}} - {{messageRead.minuteAndHour}}</p>
                             </div>
                         </div>
                     </div>
@@ -76,7 +79,8 @@
             <form action="#" class="bg-light">
                 <div class="input-group">
                     <input type="text" class="form-control rounded-0 border-0 py-4 bg-light" [(ngModel)]="send_message"
-                    (keydown.enter)="SendMessage()"  [ngModelOptions]="{standalone: true}" placeholder="mesajını yaz" />
+                        (keydown.enter)="SendMessage()" [ngModelOptions]="{standalone: true}"
+                        placeholder="mesajını yaz" />
                     <div class="input-group-append">
                         <button id="button-addon2" type="text" class="btn btn-link"> <i class="fa fa-paper-plane"
                                 (click)="SendMessage()"></i></button>
