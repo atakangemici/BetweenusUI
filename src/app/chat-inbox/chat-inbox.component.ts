@@ -17,6 +17,7 @@ export class ChatInboxComponent implements OnInit {
   messageArray = Array<object>();
   userArray = Array<object>();
   messagePassword: string;
+  hashPassword: string;
   userName: string;
   randomPass: string;
   userNameCheck: boolean;
@@ -68,8 +69,10 @@ export class ChatInboxComponent implements OnInit {
     if (!this.userNameCheck)
       this.userArray.push(userName);
 
+    this.hashPassword = [...this.messagePassword].reverse().join("");
+
     let data = {};
-    data["password"] = this.messagePassword;
+    data["password"] = this.hashPassword;
     data["users"] = this.userName;
 
     this.socket.emit('message', data);
@@ -84,12 +87,13 @@ export class ChatInboxComponent implements OnInit {
       this.new_message = this.send_message;
       let dateTime = new Date()
       let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
+      this.hashPassword = [...this.messagePassword].reverse().join("");
 
       let data = {};
-      data["password"] = this.EncryptText(this.messagePassword , 18);
-      data["users"] = this.EncryptText(this.userName , 18);
+      data["password"] = this.hashPassword;
+      data["users"] = this.EncryptText(this.userName, 18);
       data["time"] = minuteAndHour;
-      data["message"] = this.EncryptText(this.send_message , 18);
+      data["message"] = this.EncryptText(this.send_message, 18);
 
       this.socket.emit('message', data);
 
@@ -108,7 +112,9 @@ export class ChatInboxComponent implements OnInit {
     this.socket.on('message-broadcast', (data: object) => {
 
       console.log(data);
-      if (data["password"] == this.messagePassword) {
+      var decryptPass = [...this.messagePassword].reverse().join("");
+
+      if (data["password"] == decryptPass) {
 
         if (data["message"] != null) {
           let messageObj = {};
