@@ -15,7 +15,7 @@ export class ChatInboxComponent implements OnInit {
   new_message: string;
   user_send: string;
   messageArray = Array<object>();
-  userArray = Array<object>();
+  userArray = Array<string>();
   messagePassword: string;
   hashPassword: string;
   userName: string;
@@ -125,10 +125,17 @@ export class ChatInboxComponent implements OnInit {
           messageObj["user"] = "you";
           messageObj["fromUser"] = this.DecryptText(data["users"], 18);
           this.messageArray.push(messageObj);
+
+          var userCheck;
+          this.userArray.forEach(name => {
+            if (name == messageObj["fromUser"].toString())
+              userCheck = true;
+          });
+
+          if (!userCheck)
+            this.userArray.push(messageObj["fromUser"].toString());
+
         }
-
-
-        // this.userArray.push(data["users"]);
 
       }
     });
