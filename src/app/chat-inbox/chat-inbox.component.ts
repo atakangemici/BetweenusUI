@@ -27,6 +27,37 @@ export class ChatInboxComponent implements OnInit {
     this.SetupSocketConnection();
   }
 
+  EncryptText(plaintext, shiftAmount) {
+    var ciphertext = "";
+    for (var i = 0; i < plaintext.length; i++) {
+      var plainCharacter = plaintext.charCodeAt(i);
+      if (plainCharacter >= 97 && plainCharacter <= 122) {
+        ciphertext += String.fromCharCode((plainCharacter - 97 + shiftAmount) % 26 + 97);
+      } else if (plainCharacter >= 65 && plainCharacter <= 90) {
+        ciphertext += String.fromCharCode((plainCharacter - 65 + shiftAmount) % 26 + 65);
+      } else {
+        ciphertext += String.fromCharCode(plainCharacter);
+      }
+    }
+    return ciphertext;
+  }
+
+  DecryptText(ciphertext, shiftAmount) {
+    var plaintext = "";
+    for (var i = 0; i < ciphertext.length; i++) {
+      var cipherCharacter = ciphertext.charCodeAt(i);
+      if (cipherCharacter >= 97 && cipherCharacter <= 122) {
+        plaintext += String.fromCharCode((cipherCharacter - 97 - shiftAmount + 26) % 26 + 97);
+      } else if (cipherCharacter >= 65 && cipherCharacter <= 90) {
+        plaintext += String.fromCharCode((cipherCharacter - 65 - shiftAmount + 26) % 26 + 65);
+      } else {
+        plaintext += String.fromCharCode(cipherCharacter);
+      }
+    }
+    return plaintext;
+  }
+
+
   JoinChat(userName) {
 
     this.userArray.forEach(name => {
@@ -55,10 +86,10 @@ export class ChatInboxComponent implements OnInit {
       let minuteAndHour = dateTime.getHours() + ':' + dateTime.getMinutes()
 
       let data = {};
-      data["password"] = this.messagePassword;
-      data["users"] = this.userName;
+      data["password"] = this.EncryptText(this.messagePassword , 18);
+      data["users"] = this.EncryptText(this.userName , 18);
       data["time"] = minuteAndHour;
-      data["message"] = this.send_message;
+      data["message"] = this.EncryptText(this.send_message , 18);
 
       this.socket.emit('message', data);
 
@@ -81,15 +112,15 @@ export class ChatInboxComponent implements OnInit {
 
         if (data["message"] != null) {
           let messageObj = {};
-          messageObj["message"] = data["message"];
+          messageObj["message"] = this.DecryptText(data["message"], 18);
           messageObj["minuteAndHour"] = data["time"];
           messageObj["user"] = "you";
-          messageObj["fromUser"] = data["users"];
+          messageObj["fromUser"] = this.DecryptText(data["users"], 18);
           this.messageArray.push(messageObj);
         }
 
 
-        this.userArray.push(data["users"]);
+        // this.userArray.push(data["users"]);
 
       }
     });
