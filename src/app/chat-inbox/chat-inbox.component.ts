@@ -19,6 +19,7 @@ export class ChatInboxComponent implements OnInit {
   messagePassword: string;
   hashPassword: string;
   userName: string;
+  userNameView: string;
   randomPass: string;
   userNameCheck: boolean;
 
@@ -70,10 +71,11 @@ export class ChatInboxComponent implements OnInit {
       this.userArray.push(userName);
 
     this.hashPassword = [...this.messagePassword].reverse().join("");
+    this.userNameView = this.userName;
 
     let data = {};
     data["password"] = this.hashPassword;
-    data["users"] = this.userName;
+    data["users"] = this.EncryptText(this.userName, 18);
 
     this.socket.emit('message', data);
   }
