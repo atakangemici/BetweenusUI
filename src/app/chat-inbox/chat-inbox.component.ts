@@ -113,7 +113,6 @@ export class ChatInboxComponent implements OnInit {
     this.socket = io(SOCKET_ENDPOINT);
     this.socket.on('message-broadcast', (data: object) => {
 
-      console.log(data);
       var decryptPass = [...this.messagePassword].reverse().join("");
 
       if (data["password"] == decryptPass) {
@@ -126,7 +125,7 @@ export class ChatInboxComponent implements OnInit {
           messageObj["fromUser"] = this.DecryptText(data["users"], 18);
           this.messageArray.push(messageObj);
 
-          var userCheck;
+          var userCheck; 
           this.userArray.forEach(name => {
             if (name == messageObj["fromUser"].toString())
               userCheck = true;
