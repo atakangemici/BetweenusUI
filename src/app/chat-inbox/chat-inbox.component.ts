@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 
-const SOCKET_ENDPOINT = 'https://aramizda-app-backend.herokuapp.com';
-// const SOCKET_ENDPOINT = 'http://localhost:3000';
+// const SOCKET_ENDPOINT = 'https://aramizda-app-backend.herokuapp.com';
+const SOCKET_ENDPOINT = 'http://localhost:3000';
 
 @Component({
   selector: 'app-chat-inbox',
@@ -22,11 +22,20 @@ export class ChatInboxComponent implements OnInit {
   userNameView: string;
   randomPass: string;
   userNameCheck: boolean;
+  signUp : boolean;
 
   constructor() { }
 
   ngOnInit() {
     this.SetupSocketConnection();
+  }
+
+  signUpClick(){
+    this.signUp = true;
+  }
+
+  signInClick(){
+    this.signUp = false;
   }
 
   EncryptText(plaintext, shiftAmount) {
