@@ -1032,8 +1032,9 @@
                             <div class="col-md-12">
                                 <div class="bottom">
                                     <div class="position-relative w-100">
-                                        <textarea [(ngModel)]="send_message" class="form-control" placeholder="Mesajını yaz..."
+                                        <textarea [(ngModel)]="send_message" (keydown.enter)="SendMessage()" class="form-control" placeholder="Mesajını yaz..."
                                             rows="1"></textarea>
+                                            
                                         <button class="btn emoticons" ><i
                                                 class="material-icons">insert_emoticon</i></button>
                                         </div>
