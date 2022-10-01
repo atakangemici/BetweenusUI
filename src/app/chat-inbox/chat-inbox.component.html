@@ -19,7 +19,7 @@
                                     <label>{{randomPass}}</label>
                                     <button class="btn icon"><i class="material-icons">lock_outline</i></button>
                                 </div>
-                                
+
 
                                 <button type="submit" class="btn button" (click)="JoinChat(userName)"
                                     formaction="index-2.html">Katıl</button>
@@ -38,8 +38,10 @@
             <div class="container">
                 <div class="col-md-12">
                     <div class="preference">
-                        <h2>Between US</h2>
-                        <p>Kendi sohbet grubunu oluştur ve arkadaşlarınla sohbetin tadını çıkar.</p>
+                        <img width="50%"
+                        src="https://icons.getbootstrap.com/assets/img/icons-hero.png"
+                        alt="avatar">
+                        <p style="    margin-top: 10%;">Kendi sohbet grubunu oluştur ve arkadaşlarınla sohbetin tadını çıkar.</p>
                         <a (click)="signUpClick()" class="btn button">Oluştur</a>
                     </div>
                 </div>
@@ -954,16 +956,16 @@
                         <div class="top">
                             <div class="container">
                                 <div class="col-md-12">
-                                    <div class="inside">
-                                        <a href="#"><img class="avatar-md"
-                                                src="./assets/dist/img/avatars/avatar-female-5.jpg"
-                                                data-toggle="tooltip" data-placement="top" title="Keith"
-                                                alt="avatar"></a>
-                                        <div class="status">
-                                            <i class="material-icons online">fiber_manual_record</i>
-                                        </div>
-                                        <div class="data">
+                                    <div class="inside" style="font-size: 12px;">
+                                        <img width="8%"
+                                            src="https://icons.getbootstrap.com/assets/img/icons-hero.png"
+                                            alt="avatar">
 
+                                        <div class="data">
+                                            <div>
+                                                <p>Between US</p>
+                                                <label>Çevrimiçi Kişi , 3</label>
+                                            </div>
                                         </div>
                                         <!-- <button class="btn connect d-md-block d-none" name="1"><i
                                                 class="material-icons md-30">phone_in_talk</i></button>
@@ -1020,11 +1022,11 @@
                                             <span>{{userNameView}} - {{messageRead.minuteAndHour}}</span>
                                         </div>
                                     </div>
-                                   
-                                    
-                                
-                               
-                                  
+
+
+
+
+
                                 </div>
                             </div>
                         </div>
@@ -1032,15 +1034,15 @@
                             <div class="col-md-12">
                                 <div class="bottom">
                                     <div class="position-relative w-100">
-                                        <textarea [(ngModel)]="send_message" (keydown.enter)="SendMessage()" class="form-control" placeholder="Mesajını yaz..."
-                                            rows="1"></textarea>
-                                            
-                                        <button class="btn emoticons" ><i
+                                        <textarea [(ngModel)]="send_message" (keydown.enter)="SendMessage()"
+                                            class="form-control" placeholder="Mesajını yaz..." rows="1"></textarea>
+
+                                        <button class="btn emoticons"><i
                                                 class="material-icons">insert_emoticon</i></button>
-                                        </div>
+                                    </div>
                                     <label>
-                                        <span (click)="SendMessage()" class="btn attach d-sm-block d-none"><i class="fa fa-paper-plane"
-                                                style="    font-size: 24px;"></i>
+                                        <span (click)="SendMessage()" class="btn attach d-sm-block d-none"><i
+                                                class="fa fa-paper-plane" style="    font-size: 24px;"></i>
                                         </span>
                                     </label>
                                 </div>
@@ -1056,8 +1058,7 @@
                                     <div class="inside">
                                         <div class="panel">
                                             <div class="participant">
-                                                <img class="avatar-xxl"
-                                                    src="./assets/dist/img/avatars/avatar-female-5.jpg" alt="avatar">
+                                                <img class="avatar-xxl" src="./assets/dist/img/logo.png" alt="avatar">
                                                 <span>Connecting</span>
                                             </div>
                                             <div class="options">
