@@ -23,6 +23,7 @@ export class ChatInboxComponent implements OnInit {
   randomPass: string;
   userNameCheck: boolean;
   signUp : boolean;
+  chatApp : boolean;
 
   constructor() { }
 
@@ -70,6 +71,8 @@ export class ChatInboxComponent implements OnInit {
 
 
   JoinChat(userName) {
+
+    this.chatApp = true;
 
     this.userArray.forEach(name => {
       if (name == userName)
