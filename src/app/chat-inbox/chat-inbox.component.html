@@ -10,14 +10,13 @@
                             <div style="margin: auto;max-width:50%">
 
                                 <div class="form-group">
-                                    <input type="text" [(ngModel)]="userName" class="form-control" placeholder="İsim">
+                                    <input type="text" [(ngModel)]="userName" class="form-control" placeholder="Ad Soyad">
                                 </div>
 
                                 <div class="form-group">
                                     <input type="password" [(ngModel)]="messagePassword" id="inputPassword"
                                         class="form-control" placeholder="Şifre" required>
                                     <label>{{randomPass}}</label>
-                                    <button class="btn icon"><i class="material-icons">lock_outline</i></button>
                                 </div>
 
 
@@ -64,14 +63,13 @@
                             <div style="margin: auto;max-width:50%">
 
                                 <div class="form-group">
-                                    <input type="text" [(ngModel)]="userName" class="form-control" placeholder="İsim">
+                                    <input type="text" [(ngModel)]="userName" class="form-control" placeholder="Ad Soyad">
                                 </div>
 
                                 <div class="form-group">
                                     <input type="password" [(ngModel)]="messagePassword" id="inputPassword"
                                         class="form-control" placeholder="Şifre" required>
                                     <label>{{randomPass}}</label>
-                                    <button class="btn icon"><i class="material-icons">lock_outline</i></button>
                                 </div>
                                 <button type="submit" (click)="GeneratePassword()" class="btn button info"
                                     style="margin-bottom:3%" formaction="index-2.html">Şifre Üret</button>
@@ -107,23 +105,6 @@
 <main *ngIf="chatApp">
     <div class="layout">
         <!-- Start of Navigation -->
-        <div class="navigation">
-            <div class="container">
-                <div class="inside">
-                    <div class="nav nav-tab menu">
-                        <button class="btn"><img class="avatar-xl" src="./assets/dist/img/avatars/avatar-male-1.jpg"
-                                alt="avatar"></button>
-                        <!-- <a href="#discussions" data-toggle="tab" class="active"><i
-                                class="material-icons active">chat_bubble_outline</i></a>
-                        <a href="#members" data-toggle="tab"><i class="material-icons">account_circle</i></a> -->
-                        <!-- <a href="#notifications" data-toggle="tab" class="f-grow1"><i class="material-icons">notifications_none</i></a>
-								<button class="btn mode"><i class="material-icons">brightness_2</i></button>
-								<a href="#settings" data-toggle="tab"><i class="material-icons">settings</i></a>
-								<button class="btn power" onclick="visitPage();"><i class="material-icons">power_settings_new</i></button> -->
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- End of Navigation -->
         <!-- Start of Sidebar -->
         <div class="sidebar" id="sidebar" style="border-right: 1px solid #d9e0e7">
@@ -218,7 +199,7 @@
                                         </div>
                                     </a>
                                     <a href="#" class="filterMembers all offline contact" data-toggle="list">
-                                        <img class="avatar-md" src="./assets/dist/img/avatars/avatar-female-5.jpg"
+                                        <img class="avatar-md" src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"
                                             data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
                                         <div class="status">
                                             <i class="material-icons offline">fiber_manual_record</i>
@@ -293,10 +274,11 @@
                             </div>						 -->
                             <div class="discussions">
                                 <h1>Katılanlar</h1>
+                                
                                 <div class="list-group" id="chats" role="tablist" *ngFor="let user of userArray">
                                     <a href="#list-chat" class="filterDiscussions all read single" id="list-chat-list3"
                                         data-toggle="list" role="tab">
-                                        <img class="avatar-md" src="./assets/dist/img/avatars/avatar-female-3.jpg"
+                                        <img class="avatar-md" src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"
                                             data-toggle="tooltip" data-placement="top" title="Harmony" alt="avatar">
                                         <div class="status">
                                             <i class="material-icons online">fiber_manual_record</i>
@@ -964,15 +946,14 @@
                                         <div class="data">
                                             <div>
                                                 <p>Between US</p>
-                                                <label>Çevrimiçi Kişi , 3</label>
+                                                <label>Çevrimiçi Kişi , {{userArray.length}}</label>
                                             </div>
                                         </div>
                                         <!-- <button class="btn connect d-md-block d-none" name="1"><i
                                                 class="material-icons md-30">phone_in_talk</i></button>
                                         <button class="btn connect d-md-block d-none" name="1"><i
                                                 class="material-icons md-36">videocam</i></button> -->
-                                        <button class="btn d-md-block d-none"><i
-                                                class="material-icons md-30">info</i></button>
+                                        <button class="btn d-md-block d-none"><i></i></button>
                                         <!-- <div class="dropdown">
                                             <button class="btn" data-toggle="dropdown" aria-haspopup="true"
                                                 aria-expanded="false"><i
@@ -1011,7 +992,7 @@
                                     </div>
 
                                     <div class="message" *ngIf="messageRead.user == 'you'">
-                                        <img class="avatar-md" src="./assets/dist/img/avatars/avatar-female-5.jpg"
+                                        <img class="avatar-md" src="https://cdn3.iconfinder.com/data/icons/vector-icons-6/96/256-512.png"
                                             data-toggle="tooltip" data-placement="top" title="Keith" alt="avatar">
                                         <div class="text-main">
                                             <div class="text-group">
@@ -1037,8 +1018,7 @@
                                         <textarea [(ngModel)]="send_message" (keydown.enter)="SendMessage()"
                                             class="form-control" placeholder="Mesajını yaz..." rows="1"></textarea>
 
-                                        <button class="btn emoticons"><i
-                                                class="material-icons">insert_emoticon</i></button>
+                                      
                                     </div>
                                     <label>
                                         <span (click)="SendMessage()" class="btn attach d-sm-block d-none"><i
