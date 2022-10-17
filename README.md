@@ -1,3 +1,3 @@
 # Link
 
-https://aramizda-app.herokuapp.com
+https://betweenus-app.herokuapp.com
