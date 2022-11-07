@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { io } from 'socket.io-client';
 
-// const SOCKET_ENDPOINT = 'https://betweenus-app.herokuapp.com';
-const SOCKET_ENDPOINT = 'http://localhost:3000';
+const SOCKET_ENDPOINT = 'https://betweenus-app.herokuapp.com';
+// const SOCKET_ENDPOINT = 'http://localhost:3000';
 
 @Component({
   selector: 'app-chat-inbox',
