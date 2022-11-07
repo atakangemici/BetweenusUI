@@ -1,6 +1,6 @@
 <main *ngIf="!signUp && !chatApp">
     <div class="layout">
-        <!-- Start of Katıl -->
+        <!-- Start of Login -->
         <div class="main order-md-1">
             <div class="start">
                 <div class="container">
@@ -52,7 +52,7 @@
 
 <main *ngIf="signUp && !chatApp">
     <div class="layout">
-        <!-- Start of Oluştur -->
+        <!-- Start of Register -->
         <div class="main order-md-2">
             <div class="start">
                 <div class="container">
@@ -106,27 +106,12 @@
 
 <main *ngIf="chatApp">
     <div class="layout">
-        <!-- Start of Navigation -->
-        <!-- End of Navigation -->
-        <!-- Start of Sidebar -->
+        <!-- Start of Chat-->
         <div class="sidebar" id="sidebar" style="border-right: 1px solid #d9e0e7">
             <div class="container">
                 <div class="col-md-12">
                     <div class="tab-content">
-                        <!-- Start of Contacts -->
                         <div class="tab-pane fade" id="members">
-                            <!-- <div class="search">
-                                <form class="form-inline position-relative">
-                                    <input type="search" class="form-control" id="people" placeholder="Search for people...">
-                                    <button type="button" class="btn btn-link loop"><i class="material-icons">search</i></button>
-                                </form>
-                                <button class="btn create" data-toggle="modal" data-target="#exampleModalCenter"><i class="material-icons">person_add</i></button>
-                            </div> -->
-                            <!-- <div class="list-group sort">
-                                <button class="btn filterMembersBtn active show" data-toggle="list" data-filter="all">All</button>
-                                <button class="btn filterMembersBtn" data-toggle="list" data-filter="online">Online</button>
-                                <button class="btn filterMembersBtn" data-toggle="list" data-filter="offline">Offline</button>
-                            </div>						 -->
                             <div class="contacts">
                                 <h1>Contacts</h1>
                                 <div class="list-group" id="contacts" role="tablist">
@@ -259,24 +244,10 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End of Contacts -->
-                        <!-- Start of Discussions -->
+
                         <div id="discussions" class="tab-pane fade active show">
-                            <!-- <div class="search">
-                                <form class="form-inline position-relative">
-                                    <input type="search" class="form-control" id="conversations" placeholder="Search for conversations...">
-                                    <button type="button" class="btn btn-link loop"><i class="material-icons">search</i></button>
-                                </form>
-                                <button class="btn create" data-toggle="modal" data-target="#startnewchat"><i class="material-icons">create</i></button>
-                            </div> -->
-                            <!-- <div class="list-group sort">
-                                <button class="btn filterDiscussionsBtn active show" data-toggle="list" data-filter="all">All</button>
-                                <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="read">Read</button>
-                                <button class="btn filterDiscussionsBtn" data-toggle="list" data-filter="unread">Unread</button>
-                            </div>						 -->
                             <div class="discussions">
-                                <h1>Katılanlar</h1>
-                                
+                                <h1>Katılanlar</h1>      
                                 <div class="list-group" id="chats" role="tablist" *ngFor="let user of userArray">
                                     <a href="#list-chat" class="filterDiscussions all read single" id="list-chat-list3"
                                         data-toggle="list" role="tab">
@@ -294,8 +265,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- End of Discussions -->
-                        <!-- Start of Notifications -->
+   
                         <div id="notifications" class="tab-pane fade">
                             <div class="search">
                                 <form class="form-inline position-relative">
@@ -929,13 +899,12 @@
                 </div>
             </div>
         </div>
-        <!-- End of Create Chat -->
+
+
         <div class="main">
             <div class="tab-content" id="nav-tabContent">
-                <!-- Start of Babble -->
                 <div class="babble tab-pane fade active show" id="list-chat" role="tabpanel"
                     aria-labelledby="list-chat-list">
-                    <!-- Start of Chat -->
                     <div class="chat" id="chat1">
                         <div class="top">
                             <div class="container">
@@ -1005,11 +974,6 @@
                                             <span>{{messageRead.fromUser}} - {{messageRead.minuteAndHour}}</span>
                                         </div>
                                     </div>
-
-
-
-
-
                                 </div>
                             </div>
                         </div>
@@ -1018,9 +982,7 @@
                                 <div class="bottom">
                                     <div class="position-relative w-100">
                                         <textarea [(ngModel)]="send_message" (keydown.enter)="SendMessage()"
-                                            class="form-control" placeholder="Mesajını yaz..." rows="1"></textarea>
-
-                                      
+                                            class="form-control" placeholder="Mesajını yaz..." rows="1"></textarea>                  
                                     </div>
                                     <label>
                                         <span (click)="SendMessage()" class="btn attach d-sm-block d-none"><i
