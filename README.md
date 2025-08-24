@@ -1,3 +1,4 @@
-# Link
+# Screen Shots
 
-https://aramizda-app.herokuapp.com
+![Uploading image.png…]()
+
